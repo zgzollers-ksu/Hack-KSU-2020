@@ -4,6 +4,8 @@ from textblob import TextBlob as tb
 from nltk.corpus import wordnet
 
 class spider:
+
+	class_nouns = []
     def __init__(self):
         pass
 
@@ -33,4 +35,4 @@ class spider:
 		    if i not in fixed_nouns: 
 		        fixed_nouns.append(i)
 
-		return fixed_nouns
+		self.class_nouns = fixed_nouns
