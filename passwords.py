@@ -15,10 +15,10 @@ def generate_passwords(entropy: int, max_num: int = -1):
 
     :param entropy: Maximum password entropy using the given character/word set
     :param max_num: Maximum number of passwords to be generated. Useful for generating partial sets of passwords given
-        high entropy.
+        a high entropy value.
     :return: An exhaustive List of passwords meeting the requirements of entropy, length, and character set
     """
-    
+
     pass
 
 
@@ -39,7 +39,7 @@ def generate_num_words(max: int, min: int=1):
     for i in range(min, max + 1):
         # For each combination of length i
         for item in itertools.combinations_with_replacement(characters, i):
-            # Assemble characters into a String and append to list
+            # Assemble characters into a String and append to the list
             word = ""
 
             for c in item:
