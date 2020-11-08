@@ -1,4 +1,5 @@
 import hashlib
+import passwords
 
 def find_match(options: dict, hash: list):
     for item in hash:
@@ -6,4 +7,3 @@ def find_match(options: dict, hash: list):
             return dict[item]
 
     return "\0"
-
