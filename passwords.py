@@ -8,7 +8,17 @@ sym_words = []
 pool = []
 
 
-def generate_passwords(entropy: int):
+def generate_passwords(entropy: int, max_num: int = -1):
+    """
+    Generate all possible passwords with the defined character set from 1 to n (inclusive) bits of entropy or a maximum
+    number of items (whichever comes first).
+
+    :param entropy: Maximum password entropy using the given character/word set
+    :param max_num: Maximum number of passwords to be generated. Useful for generating partial sets of passwords given
+        high entropy.
+    :return: An exhaustive List of passwords meeting the requirements of entropy, length, and character set
+    """
+    
     pass
 
 
