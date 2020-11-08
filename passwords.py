@@ -22,23 +22,23 @@ def generate_passwords(entropy: int, max_num: int = -1):
     pass
 
 
-def generate_num_words(max: int, min: int=1):
+def generate_words(char_set: list, max: int, min: int=1):
     """
-    Generate all possible combinations of numeric characters between a minimum (inclusive) and maximum (inclusive) word
+    Generate all possible combinations of characters between a minimum (inclusive) and maximum (inclusive) word
     length.
 
+    :param char_set: all possible characters to be included in generated words
     :param max: maximum number of characters in a word
     :param min: minimum number of characters in a word
-    :return: list of words containing all possible combinations of numeric characters
+    :return: list of words containing all possible combinations of characters in the provided character set
     """
-
-    characters = [str(num) for num in range(10)]  # list of numeric characters (0 - 9)
+    
     words = []
 
     # For each length between the minimum and maximum (inclusive)
     for i in range(min, max + 1):
         # For each combination of length i
-        for item in itertools.combinations_with_replacement(characters, i):
+        for item in itertools.combinations_with_replacement(char_set, i):
             # Assemble characters into a String and append to the list
             word = ""
 
