@@ -9,7 +9,7 @@ def find_match(options: dict, hash: list):
     return "\0"
 
 
-#Reads in a file name and returns a list where each line in the file is a value in the list
+# Reads in a file name and returns a list where each line in the file is a value in the list
 def read_file(file_name):
     fo = open(file_name, "r")
     password_list = fo.readlines()
@@ -19,5 +19,3 @@ def read_file(file_name):
     fo.close()
     return password_list
 
-
-print(passwords.generate_passwords(20.0, 1000))
