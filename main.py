@@ -19,3 +19,9 @@ def read_file(file_name):
     fo.close()
     return password_list
 
+
+def main():
+    pass
+
+
+main()
