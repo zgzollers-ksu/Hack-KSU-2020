@@ -2,17 +2,18 @@ import itertools
 import string
 import hashlib
 import math
+import spider
+
+url = None
 
 
-def generate_passwords(entropy: float, max_num: int = -1, ):
+def generate_passwords(entropy: float):
     """
     Generate all possible passwords with the defined character set from a minimum to n (inclusive) bits of entropy or a
     maximum number of items (whichever comes first). If a password of length 1 exceeds the maximum entropy given the
     character set, then an empty list will be returned (the character set will not be adjusted).
 
     :param entropy: Maximum password entropy using the given character/word set
-    :param max_num: Maximum number of passwords to be generated. Useful for generating partial sets of passwords given
-        a high entropy value.
     :return: An exhaustive List of passwords meeting the requirements of entropy, length, and character set
     """
 
@@ -25,6 +26,16 @@ def generate_passwords(entropy: float, max_num: int = -1, ):
     char_pool = []
     char_pool.extend(numeric)
     char_pool.extend(alpha_al)
+
+    # if URL is given, added scraped words
+    if url != None:
+        s = spider.spider()
+        s.make_request(url)
+        scraped = s.class_nouns
+
+        char_pool.extend(scraped)
+
+
     passwd_len = entropy_length(entropy, len(char_pool))
 
     passwords = generate_words(char_pool, passwd_len)
