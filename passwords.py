@@ -17,17 +17,19 @@ def generate_passwords(entropy: float, max_num: int = -1, ):
     """
 
     numeric = generate_words(list(string.digits), 3)
-    alpha_up = generate_words(list(string.ascii_lowercase), 3)
-    alpha_lo = generate_words(list(string.ascii_uppercase), 3)
+    # alpha_up = generate_words(list(string.ascii_lowercase), 3)
+    # alpha_lo = generate_words(list(string.ascii_uppercase), 3)
     alpha_al = generate_words(list(string.ascii_letters), 3)
     scraped = []
 
-    char_pool = numeric + alpha_up + alpha_lo + alpha_al + scraped
+    char_pool = []
+    char_pool.extend(numeric)
+    char_pool.extend(alpha_al)
     passwd_len = entropy_length(entropy, len(char_pool))
 
     passwords = generate_words(char_pool, passwd_len)
 
-    return [{hashlib.sha256(bytes(word, 'utf-8')).digest(), word} for word in passwords]
+    return {str(hashlib.sha256(bytes(word, 'utf-8')).digest()) : word for word in passwords}
 
 
 def generate_words(char_set: list, max: int, min: int=1):
@@ -46,7 +48,7 @@ def generate_words(char_set: list, max: int, min: int=1):
     # For each length between the minimum and maximum (inclusive)
     for i in range(min, max + 1):
         # For each combination of length i
-        for item in itertools.permutations(char_set, i):
+        for item in itertools.product(char_set, repeat=i):
             # Assemble characters into a String and append to the list
             word = ""
 
