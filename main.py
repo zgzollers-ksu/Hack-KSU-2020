@@ -1,6 +1,7 @@
 import hashlib
 import passwords
 
+
 def find_match(options: dict, hash: list):
     for item in hash:
         if item in dict.keys():

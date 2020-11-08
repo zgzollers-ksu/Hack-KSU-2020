@@ -1,17 +1,14 @@
 import itertools
-
-scraped_words = []
-num_words = []
-alpha_words = []
-sym_words = []
-
-pool = []
+import string
+import hashlib
+import math
 
 
-def generate_passwords(entropy: int, max_num: int = -1):
+def generate_passwords(entropy: float, max_num: int = -1, ):
     """
-    Generate all possible passwords with the defined character set from 1 to n (inclusive) bits of entropy or a maximum
-    number of items (whichever comes first).
+    Generate all possible passwords with the defined character set from a minimum to n (inclusive) bits of entropy or a
+    maximum number of items (whichever comes first). If a password of length 1 exceeds the maximum entropy given the
+    character set, then an empty list will be returned (the character set will not be adjusted).
 
     :param entropy: Maximum password entropy using the given character/word set
     :param max_num: Maximum number of passwords to be generated. Useful for generating partial sets of passwords given
@@ -19,7 +16,19 @@ def generate_passwords(entropy: int, max_num: int = -1):
     :return: An exhaustive List of passwords meeting the requirements of entropy, length, and character set
     """
 
-    pass
+    numeric = generate_words(list(string.digits), 3)
+    alpha_up = generate_words(list(string.ascii_lowercase), 3)
+    alpha_lo = generate_words(list(string.ascii_uppercase), 3)
+    alpha_al = generate_words(list(string.ascii_letters), 3)
+    scraped = []
+
+    char_pool = numeric + alpha_up + alpha_lo + alpha_al + scraped
+    passwd_len = entropy_length(entropy, len(char_pool))
+
+    passwords = generate_words(char_pool, passwd_len)
+
+    return [{hashlib.sha256().update(word).digest(), word} for word in passwords]
+
 
 
 def generate_words(char_set: list, max: int, min: int=1):
@@ -32,13 +41,13 @@ def generate_words(char_set: list, max: int, min: int=1):
     :param min: minimum number of characters in a word
     :return: list of words containing all possible combinations of characters in the provided character set
     """
-    
+
     words = []
 
     # For each length between the minimum and maximum (inclusive)
     for i in range(min, max + 1):
         # For each combination of length i
-        for item in itertools.combinations_with_replacement(char_set, i):
+        for item in itertools.permutations(char_set, i):
             # Assemble characters into a String and append to the list
             word = ""
 
@@ -48,3 +57,7 @@ def generate_words(char_set: list, max: int, min: int=1):
             words.append(word)
 
     return words
+
+
+def entropy_length(entropy: float, num_chars: int):
+    return round(math.log((2 ** entropy), num_chars))
