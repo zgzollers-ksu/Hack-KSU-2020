@@ -9,4 +9,4 @@ def find_match(options: dict, hash: list):
 
     return "\0"
 
-passwords.generate_passwords(1)
+print(passwords.generate_passwords(20, 1000000))
