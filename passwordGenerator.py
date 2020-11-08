@@ -11,4 +11,4 @@ def add_numbers(word, words2):
     for x in range(1, 100):
         words2.append("{}{}".format(word, x))
 
-#def hash_passwords():
+#def hash_passwords(word):
