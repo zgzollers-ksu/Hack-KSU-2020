@@ -1,6 +1,7 @@
 import itertools
 import string
 import hashlib
+import math
 
 
 def generate_passwords(entropy: float, max_num: int = -1, ):
@@ -26,7 +27,7 @@ def generate_passwords(entropy: float, max_num: int = -1, ):
 
     passwords = generate_words(char_pool, passwd_len)
 
-    return [{hashlib.sha256(word), word} for word in passwords]
+    return [{hashlib.sha256().update(word).digest(), word} for word in passwords]
 
 
 
@@ -59,4 +60,4 @@ def generate_words(char_set: list, max: int, min: int=1):
 
 
 def entropy_length(entropy: float, num_chars: int):
-    pass
+    return round(math.log((2 ** entropy), num_chars))
