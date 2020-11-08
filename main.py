@@ -8,6 +8,7 @@ def find_match(options: dict, hash: list):
             return dict[item]
     return "\0"
 
+
 #Reads in a file name and returns a list where each line in the file is a value in the list
 def read_file(file_name):
     fo = open(file_name, "r")
@@ -17,3 +18,6 @@ def read_file(file_name):
             password_list[i] = password_list[i][0:-1]
     fo.close()
     return password_list
+
+
+print(passwords.generate_passwords(20.0, 1000))
