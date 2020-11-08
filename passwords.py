@@ -26,6 +26,7 @@ def generate_passwords(entropy: float, max_num: int = -1, ):
     passwd_len = entropy_length(entropy, len(char_pool))
 
     passwords = generate_words(char_pool, passwd_len)
+    hash =
 
     return [{hashlib.sha256().update(word).digest(), word} for word in passwords]
 
@@ -60,4 +61,13 @@ def generate_words(char_set: list, max: int, min: int=1):
 
 
 def entropy_length(entropy: float, num_chars: int):
+    """
+    Calculates the maximum length of a password given the maximum entropy (bits) and number of characters in the
+    character pool. If there is a decimal, the value is rounded up to the nearest whole integer.
+
+    :param entropy: maximum bits of entropy
+    :param num_chars: number of characters in the character pool
+    :return: maximum length of a password
+    """
+    
     return round(math.log((2 ** entropy), num_chars))
