@@ -25,7 +25,7 @@ def read_file(file_name):
 def main():
     file_contents = read_file(input("Enter filename containing hashed passwords: "))
     entropy = float(input("Enter the entropy limit (bits): "))
-    # passwords.url = input("Enter a URL: ")
+    passwords.url = input("Enter a URL: ")
     # max_num = int(input("Enter the max number of passwords: "))
 
     passwds = passwords.generate_passwords(entropy)
